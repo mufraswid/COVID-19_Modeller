@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1022
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "stima2", "stima2\stima2.csproj", "{4F6CE6FC-E097-48B5-99D6-8F304A0DFA61}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F6CE6FC-E097-48B5-99D6-8F304A0DFA61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F6CE6FC-E097-48B5-99D6-8F304A0DFA61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F6CE6FC-E097-48B5-99D6-8F304A0DFA61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F6CE6FC-E097-48B5-99D6-8F304A0DFA61}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B2942B13-7B4E-4B27-8BEC-17E5E0537813}
+	EndGlobalSection
+EndGlobal
