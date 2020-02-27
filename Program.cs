@@ -6,20 +6,28 @@ namespace Testing
     class Program
     {
         static void Main(string[] args) {
-        	int numNode = 0; 
+        	Graph g = new Graph();
+
+        	loadGraph(ref g);
+
+        	//debug
+ 	        Console.WriteLine(g.getNodeFromIdx(4).getPopulation());
+ 	        Console.WriteLine(g.getEdgeFromIdx(1).getWeight());
+
+        }
+
+        static void loadGraph(ref Graph g){
+        	int numNodes = 0; int numEdges = 0;
         	string startingCity = "";
-            string filename = "";
-        	Graph map = new Graph();
 
+        	System.Console.Write("Masukkan nama file node: ");
+            string nodeFile = System.Console.ReadLine();
 
-            System.Console.Write("Masukkan nama file: ");
+            System.Console.Write("Masukkan nama file edge: ");
+            string edgeFile = System.Console.ReadLine();
             
-            filename = System.Console.ReadLine();
-            
- 	        Parser.readNodes(filename, ref numNode, ref startingCity, ref map);
-
- 	        Console.WriteLine(map.getNode(3).getName());
-
+ 	        Parser.readNodes(nodeFile, ref numNodes, ref startingCity, ref g);
+ 	        Parser.readEdges(edgeFile, ref numEdges, ref g);
         }
     }
 }

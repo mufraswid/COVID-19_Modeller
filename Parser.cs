@@ -5,20 +5,41 @@ namespace Testing
 {
     public class Parser {
 
-        static public void readNodes(string filename, ref int numNodes, ref string startingCity, ref Graph map){
+        static public void readNodes(string filename, ref int numNodes, ref string startingCity, ref Graph g){
        		System.IO.StreamReader file = new System.IO.StreamReader(@filename);
 
-    		getInits(file, ref numNodes, ref startingCity);
+    		string line = file.ReadLine();
+            int iter = 0;
+            numNodes = Int32.Parse(getToken(ref iter, line));
+            startingCity = getToken(ref iter, line);
 
             for(int i = 1; i <= numNodes; i++){
-                string line = file.ReadLine();
-                int iter = 0;
+                line = file.ReadLine();
+                iter = 0;
                 string nodeName = getToken(ref iter, line);
-                iter++;
                 int pop = Int32.Parse(getToken(ref iter, line));
 
                 Node temp = new Node(nodeName, pop);
-                map.addNode(temp);
+                g.addNode(temp);
+            }
+        }
+
+        static public void readEdges(string filename, ref int numEdges, ref Graph g){
+            System.IO.StreamReader file = new System.IO.StreamReader(@filename);
+
+            string line = file.ReadLine();
+            int iter = 0;
+            numEdges = Int32.Parse(getToken(ref iter, line));
+
+            for(int i = 1; i <= numEdges; i++){
+                line = file.ReadLine();
+                iter = 0;
+                string fromNode = getToken(ref iter, line);
+                string toNode = getToken(ref iter, line);
+                float weight = float.Parse(getToken(ref iter, line));
+
+                Edge temp = new Edge(fromNode, toNode, weight);
+                g.addEdge(temp);
             }
         }
 
@@ -31,19 +52,10 @@ namespace Testing
     			if(iter > line.Length-1){
     				break;
     			}
-
     		}
 
+            iter++;
     		return temp;
     	}	
-
-        static public void getInits(System.IO.StreamReader file, ref int numNodes, ref string startingCity){
-        	string line = file.ReadLine();
-        	int iter = 0;
-        	numNodes = Int32.Parse(getToken(ref iter, line));
-        	iter++;
-        	startingCity = getToken(ref iter, line);
-        }
-
     }
 }

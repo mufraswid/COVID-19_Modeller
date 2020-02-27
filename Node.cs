@@ -20,5 +20,9 @@ namespace Testing
         public string getName(){
             return name;
         }
+
+        public int getPopulation(){
+            return population;
+        }
     }
 }
