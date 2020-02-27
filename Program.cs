@@ -22,9 +22,11 @@ namespace Testing
 
         	System.Console.Write("Masukkan nama file node: ");
             string nodeFile = System.Console.ReadLine();
+            if(nodeFile == "") nodeFile = "node.txt"; //default
 
             System.Console.Write("Masukkan nama file edge: ");
             string edgeFile = System.Console.ReadLine();
+            if(edgeFile == "") edgeFile = "edge.txt"; //default
             
  	        Parser.readNodes(nodeFile, ref numNodes, ref startingCity, ref g);
  	        Parser.readEdges(edgeFile, ref numEdges, ref g);
