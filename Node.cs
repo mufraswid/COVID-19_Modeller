@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace Testing
 {
     public class Node {
@@ -12,6 +15,10 @@ namespace Testing
         //mod constructor
         public Node(string cityName, int nPop){
             name = cityName; population = nPop;
+        }
+
+        public string getName(){
+            return name;
         }
     }
 }

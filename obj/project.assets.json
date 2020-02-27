@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/fauzan/Documents/Tubes2_STIMA/Test.csproj",
+      "projectUniqueName": "/home/fauzan/Documents/Test/Test.csproj",
       "projectName": "Test",
-      "projectPath": "/home/fauzan/Documents/Tubes2_STIMA/Test.csproj",
+      "projectPath": "/home/fauzan/Documents/Test/Test.csproj",
       "packagesPath": "/home/fauzan/.nuget/packages/",
-      "outputPath": "/home/fauzan/Documents/Tubes2_STIMA/obj/",
+      "outputPath": "/home/fauzan/Documents/Test/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/fauzan/.nuget/NuGet/NuGet.Config"
