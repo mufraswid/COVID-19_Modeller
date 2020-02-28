@@ -11,9 +11,11 @@ namespace Testing
         	loadGraph(ref g);
 
         	//debug
- 	        Console.WriteLine(g.getNodeFromIdx(4).getPopulation());
- 	        Console.WriteLine(g.getEdgeFromIdx(1).getWeight());
-
+ 	        Console.WriteLine(g.getNodeFromIdx(2).isVisited());
+            g.BFS();
+            Console.WriteLine(g.getNodeFromIdx(2).isVisited());
+            g.resetGraph();
+            Console.WriteLine(g.getNodeFromIdx(2).isVisited());
         }
 
         static void loadGraph(ref Graph g){
@@ -30,6 +32,8 @@ namespace Testing
             
  	        Parser.readNodes(nodeFile, ref numNodes, ref startingCity, ref g);
  	        Parser.readEdges(edgeFile, ref numEdges, ref g);
+
+            g.setStartNode(startingCity);
         }
     }
 }
