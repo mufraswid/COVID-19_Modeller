@@ -87,7 +87,7 @@ namespace Testing
 
         public void resetGraph(){
             for(int i = 0; i < nodes.Count; i++){
-                nodes[i].setVisited(false);
+                nodes[i].setInfected(false);
                 nodes[i].setTime(0);
                 path.Clear();
             }
