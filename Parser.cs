@@ -19,7 +19,7 @@ namespace Testing
                 string nodeName = getToken(ref iter, line);
                 int pop = Int32.Parse(getToken(ref iter, line));
 
-                Node temp = new Node(nodeName, pop);
+                Node temp = new Node(nodeName, pop, 0, false);
                 g.addNode(temp);
             }
         }

@@ -6,6 +6,7 @@ namespace Testing
     public class Graph {
         private List<Node> nodes = new List<Node>();
         private List<Edge> edges = new List<Edge>();
+        private List<Edge> path = new List<Edge>();
 
         //def constructor
         public Graph(){}
@@ -26,6 +27,19 @@ namespace Testing
             return edges[i];
         }
 
+        public void printPath(){
+            Console.WriteLine(path.Count);
+            for(int i = 0; i < path.Count; i++){
+                Console.WriteLine(path[i].getSourceNode() + "->" + path[i].getDestNode());
+            }
+        }
+
+        public void getTimes(){
+            for(int i = 0; i < nodes.Count; i++){
+                Console.WriteLine(nodes[i].getTime());
+            }
+        }
+
         public Edge getEdgeFromPoints(Node src, Node dst){
             for(int i = 0; i < edges.Count; i++){
                 if(edges[i].getSourceNode() == src.getName() && edges[i].getDestNode() == dst.getName()){
@@ -44,7 +58,7 @@ namespace Testing
                 }
             }
 
-            Node err = new Node("Error", -404); //return error obj
+            Node err = new Node("Error", -404, -404, false); //return error obj
             return err;
         }
 
@@ -57,9 +71,9 @@ namespace Testing
         }
 
         public void setStartNode(string startingCity){
-            Node parent = new Node("", -1);
             getNodeFromName(startingCity).setVisited(true);
-            getNodeFromName(startingCity).setParent(parent);
+            getNodeFromName(startingCity).setInfected(true);
+            getNodeFromName(startingCity).setTime(0);
         }
 
         public Node getStartNode(){
@@ -75,30 +89,55 @@ namespace Testing
         public void resetGraph(){
             for(int i = 0; i < nodes.Count; i++){
                 nodes[i].setVisited(false);
-                nodes[i].setParent(new Node());
+                nodes[i].setTime(0);
+                path.Clear();
             }
         }
 
-        public void BFS(){
+        public void BFS(double time){
             Queue<Edge> q = new Queue<Edge>();
             addAdjacents(getStartNode(), ref q);
             while(q.Count != 0){
                 Edge temp = q.Dequeue();
-                getNodeFromName(temp.getDestNode()).setVisited(true);
+                Node src = getNodeFromName(temp.getSourceNode());
                 Node now = getNodeFromName(temp.getDestNode());
+                
+                if(S(src, now, T(src, time)) > 1 && src.getInfected()){
+                    path.Add(temp);
+                    if(!now.getInfected()){
+                        getNodeFromName(temp.getDestNode()).setTime(Math.Ceiling(tInf(src, now)) + src.getTime());
+                        getNodeFromName(temp.getDestNode()).setInfected(true);
+                    }
+                }
+
+                
                 // Console.WriteLine("Being Evaluated: " + temp.getSourceNode() + " " + temp.getDestNode()); debug
 
-                //if now is goal, break
-                
                 for(int i = 0; i < edges.Count; i++){
+
                     if(edges[i].getSourceNode() == now.getName() && !getNodeFromName(edges[i].getDestNode()).isVisited()){
-                        getNodeFromName(edges[i].getDestNode()).setVisited(true);
-                        getNodeFromName(edges[i].getDestNode()).setParent(now);
                         q.Enqueue(getEdgeFromPoints(now, getNodeFromName(edges[i].getDestNode())));
+                        getNodeFromName(temp.getDestNode()).setVisited(true);
                     }
                 }
                 // if(q.Count != 0) Console.WriteLine("Next: " + q.Peek().getSourceNode() + " " + q.Peek().getDestNode()); debug
             }
+        }
+
+        public double I(Node A, double time){
+            return Convert.ToDouble(A.getPopulation())/Convert.ToDouble(1+((A.getPopulation()-1)*Math.Exp(-0.25*time)));
+        }
+
+        public double S(Node A, Node B, double time){
+            return I(A, time) * getEdgeFromPoints(A, B).getWeight();
+        }
+
+        public double T(Node A, double n){
+            return n - A.getTime();
+        }
+
+        public double tInf(Node A, Node B){
+            return 4 * Math.Log(Convert.ToDouble(A.getPopulation()-1)/Convert.ToDouble((A.getPopulation()*getEdgeFromPoints(A, B).getWeight())-1));
         }
     }
 }

@@ -10,12 +10,13 @@ namespace Testing
 
         	loadGraph(ref g);
 
+            Console.Write("Masukkan Day: ");
+            double day = Convert.ToDouble(Console.ReadLine());
         	//debug
- 	        Console.WriteLine(g.getNodeFromIdx(2).isVisited());
-            g.BFS();
-            Console.WriteLine(g.getNodeFromIdx(2).isVisited());
+            g.BFS(day);
+            g.getTimes();
+            g.printPath();
             g.resetGraph();
-            Console.WriteLine(g.getNodeFromIdx(2).isVisited());
         }
 
         static void loadGraph(ref Graph g){

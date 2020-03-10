@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/fauzan/Documents/Test/Test.csproj": {}
+    "/home/fauzan/Documents/TUGAS/Tubes2_STIMA/Test.csproj": {}
   },
   "projects": {
-    "/home/fauzan/Documents/Test/Test.csproj": {
+    "/home/fauzan/Documents/TUGAS/Tubes2_STIMA/Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/fauzan/Documents/Test/Test.csproj",
+        "projectUniqueName": "/home/fauzan/Documents/TUGAS/Tubes2_STIMA/Test.csproj",
         "projectName": "Test",
-        "projectPath": "/home/fauzan/Documents/Test/Test.csproj",
+        "projectPath": "/home/fauzan/Documents/TUGAS/Tubes2_STIMA/Test.csproj",
         "packagesPath": "/home/fauzan/.nuget/packages/",
-        "outputPath": "/home/fauzan/Documents/Test/obj/",
+        "outputPath": "/home/fauzan/Documents/TUGAS/Tubes2_STIMA/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/fauzan/.nuget/NuGet/NuGet.Config"

@@ -6,17 +6,18 @@ namespace Testing
     public class Node {
         private string name;
         private int population;
-        private Node parent;
         private bool visited;
+        private double time;
+        private bool infected;
 
         //def constructor
         public Node(){
-            name = ""; population = 0; visited = false;
+            name = ""; population = 0; visited = false; time = 0; infected = false;
         }
 
         //mod constructor
-        public Node(string cityName, int nPop){
-            name = cityName; population = nPop; visited = false; 
+        public Node(string cityName, int nPop, int nTime, bool inf){
+            name = cityName; population = nPop; visited = false; time = nTime; infected = inf; 
         }
 
         public string getName(){
@@ -27,20 +28,28 @@ namespace Testing
             return population;
         }
 
+        public double getTime(){
+            return time;
+        }
+
         public bool isVisited(){
             return visited;
         }
 
-        public Node getParent(){
-            return parent;
+        public bool getInfected(){
+            return infected;
         }
 
         public void setVisited(bool a){
             visited = a;
         }
 
-        public void setParent(Node n){
-            parent = n;
+        public void setTime(double t){
+            time = t;
+        }
+
+        public void setInfected(bool i){
+            infected = i;
         }
     }
 }
