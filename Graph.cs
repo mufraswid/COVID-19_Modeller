@@ -71,7 +71,6 @@ namespace Testing
         }
 
         public void setStartNode(string startingCity){
-            getNodeFromName(startingCity).setVisited(true);
             getNodeFromName(startingCity).setInfected(true);
             getNodeFromName(startingCity).setTime(0);
         }
@@ -107,20 +106,14 @@ namespace Testing
                     if(!now.getInfected()){
                         getNodeFromName(temp.getDestNode()).setTime(Math.Ceiling(tInf(src, now)) + src.getTime());
                         getNodeFromName(temp.getDestNode()).setInfected(true);
+
+                        for(int i = 0; i < edges.Count; i++){
+                            if(edges[i].getSourceNode() == now.getName()){
+                                q.Enqueue(getEdgeFromPoints(now, getNodeFromName(edges[i].getDestNode())));
+                            }
+                        }
                     }
                 }
-
-                
-                // Console.WriteLine("Being Evaluated: " + temp.getSourceNode() + " " + temp.getDestNode()); debug
-
-                for(int i = 0; i < edges.Count; i++){
-
-                    if(edges[i].getSourceNode() == now.getName() && !getNodeFromName(edges[i].getDestNode()).isVisited()){
-                        q.Enqueue(getEdgeFromPoints(now, getNodeFromName(edges[i].getDestNode())));
-                        getNodeFromName(temp.getDestNode()).setVisited(true);
-                    }
-                }
-                // if(q.Count != 0) Console.WriteLine("Next: " + q.Peek().getSourceNode() + " " + q.Peek().getDestNode()); debug
             }
         }
 
