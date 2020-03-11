@@ -40,10 +40,7 @@ namespace WpfApp1
             Console.Write("Masukkan Day: ");
             double day = Convert.ToDouble(Console.ReadLine());
             //debug
-            g.BFS(day);
-            g.getTimes();
-            g.printPath();
-            g.resetGraph();
+            
         }*/
 
         private void btnOpenFile_Click(object sender, RoutedEventArgs e) // TextBox str
@@ -75,9 +72,30 @@ namespace WpfApp1
             }
         }
 
+        private int strToInt(string s)
+        {
+            int res = 0;
+            for(int i=0; i < s.Length; i++)
+            {
+                try
+                {
+                    if (s[i] - '0' > 9 || s[i] - '0' < 0)
+                        throw "err";
+                    res += s[i] - '0';
+                } catch(const char[] exc){
+                    return -1;
+                }
+            }
+            return res;
+        }
+
         private void simulateGraph_click(object sender, RoutedEventArgs e)
         {
-
+            int day = strToInt(InfectTime.Text);
+            g.BFS(day);
+            g.getTimes();
+            g.printPath();
+            g.resetGraph();
         }/**/
 
         static void loadGraph(ref Graph g)
@@ -85,13 +103,15 @@ namespace WpfApp1
             int numNodes = 0; int numEdges = 0;
             string startingCity = "";
 
-            System.Console.Write("Masukkan nama file node: ");
-            string nodeFile = System.Console.ReadLine();
-            if (nodeFile == "") nodeFile = "node.txt"; //default
+            //System.Console.Write("Masukkan nama file node: ");
+            //string nodeFile = System.Console.ReadLine();
+            //if (nodeFile == "") 
+            string nodeFile = "node.txt"; //default
 
-            System.Console.Write("Masukkan nama file edge: ");
-            string edgeFile = System.Console.ReadLine();
-            if (edgeFile == "") edgeFile = "edge.txt"; //default
+            //System.Console.Write("Masukkan nama file edge: ");
+            //string edgeFile = System.Console.ReadLine();
+            //if (edgeFile == "") 
+            string edgeFile = "edge.txt"; //default
 
             Parser.readNodes(nodeFile, ref numNodes, ref startingCity, ref g);
             Parser.readEdges(edgeFile, ref numEdges, ref g);
