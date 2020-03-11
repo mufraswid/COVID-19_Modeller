@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Testing
+namespace WpfApp1
 {
     public class Graph {
         private List<Node> nodes = new List<Node>();

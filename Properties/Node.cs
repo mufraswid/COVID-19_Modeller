@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Testing
+namespace WpfApp1
 {
     public class Node {
         private string name;
