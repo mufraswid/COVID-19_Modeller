@@ -25,10 +25,12 @@ namespace WpfApp1
     public partial class MainWindow : Window
     {
         Graph g = new Graph();
+        string placedir = "";
+        string routedir = "";
         public MainWindow()
         {
             InitializeComponent();
-            
+            //while (placedir == "" && routedir == "");
         }
 
         /*static void Main(string[] args)
@@ -77,14 +79,10 @@ namespace WpfApp1
             int res = 0;
             for(int i=0; i < s.Length; i++)
             {
-                try
-                {
-                    if (s[i] - '0' > 9 || s[i] - '0' < 0)
-                        throw "err";
-                    res += s[i] - '0';
-                } catch(const char[] exc){
-                    return -1;
-                }
+                if (s[i] - '0' > 9 || s[i] - '0' < 0)
+                    return -999;
+                res *= 10;
+                res += s[i] - '0';
             }
             return res;
         }
@@ -92,13 +90,17 @@ namespace WpfApp1
         private void simulateGraph_click(object sender, RoutedEventArgs e)
         {
             int day = strToInt(InfectTime.Text);
-            g.BFS(day);
-            g.getTimes();
-            g.printPath();
-            g.resetGraph();
+            if(day != -999)
+            {
+                loadGraph(ref g, placedir, routedir);
+                g.BFS(day);
+                g.getTimes();
+                g.printPath();
+                g.resetGraph();
+            }  
         }/**/
 
-        static void loadGraph(ref Graph g)
+        static void loadGraph(ref Graph g, string pdir, string rdir)
         {
             int numNodes = 0; int numEdges = 0;
             string startingCity = "";
@@ -106,16 +108,14 @@ namespace WpfApp1
             //System.Console.Write("Masukkan nama file node: ");
             //string nodeFile = System.Console.ReadLine();
             //if (nodeFile == "") 
-            string nodeFile = "node.txt"; //default
-
+            //string nodeFile = "node.txt"; //default
             //System.Console.Write("Masukkan nama file edge: ");
             //string edgeFile = System.Console.ReadLine();
             //if (edgeFile == "") 
-            string edgeFile = "edge.txt"; //default
+            //string edgeFile = "edge.txt"; //default
 
-            Parser.readNodes(nodeFile, ref numNodes, ref startingCity, ref g);
-            Parser.readEdges(edgeFile, ref numEdges, ref g);
-
+            Parser.readNodes(pdir, ref numNodes, ref startingCity, ref g);
+            Parser.readEdges(rdir, ref numEdges, ref g);
             g.setStartNode(startingCity);
         }
     }
