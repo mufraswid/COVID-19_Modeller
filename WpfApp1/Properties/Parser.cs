@@ -5,7 +5,7 @@ namespace WpfApp1
 {
     public class Parser {
 
-        static public void readNodes(string filename, ref int numNodes, ref string startingCity, ref Graph g){
+        static public void readNodes(string filename, ref int numNodes, ref string startingCity, ref GraphO g){
        		System.IO.StreamReader file = new System.IO.StreamReader(@filename);
 
     		string line = file.ReadLine();
@@ -24,7 +24,7 @@ namespace WpfApp1
             }
         }
 
-        static public void readEdges(string filename, ref int numEdges, ref Graph g){
+        static public void readEdges(string filename, ref int numEdges, ref GraphO g){
             System.IO.StreamReader file = new System.IO.StreamReader(@filename);
 
             string line = file.ReadLine();

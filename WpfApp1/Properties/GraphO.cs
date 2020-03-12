@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace WpfApp1
 {
-    public class Graph {
+    public class GraphO {
         private List<Node> nodes = new List<Node>();
         private List<Edge> edges = new List<Edge>();
         private List<Edge> path = new List<Edge>();
 
         //def constructor
-        public Graph(){}
+        public GraphO(){}
 
         public void addNode(Node n){
             nodes.Add(n);
@@ -17,6 +17,18 @@ namespace WpfApp1
 
         public void addEdge(Edge e){
             edges.Add(e);
+        }
+
+        public List<Node> getListNode() {
+            return nodes;
+        }
+
+        public List<Edge> getListEdge(){
+            return edges; 
+        }
+
+        public List<Edge> getPath() {
+            return path;
         }
 
         public Node getNodeFromIdx(int i){

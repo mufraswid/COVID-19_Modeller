@@ -6,31 +6,27 @@
         xmlns:gv="clr-namespace:Microsoft.Msagl.GraphViewerGdi;assembly=Microsoft.Msagl.GraphViewerGDI"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="Corona Simulation Apps" Height="594" Width="936">
-    <Grid>
+        Title="Corona Simulation Apps" Height="562.8" Width="1298.4">
+    <Grid Margin="0,0,0,-1.4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="9*"/>
             <ColumnDefinition Width="7*"/>
             <ColumnDefinition Width="101*"/>
         </Grid.ColumnDefinitions>
-        <Button Name="PlaceButton" Content="Select Places" HorizontalAlignment="Left" Margin="81,35,0,0" VerticalAlignment="Top" Height="25" Width="80" Click="btnOpenFile_Click" Grid.Column="2"/>
-        <Button Name="RouteButton" Content="Select Transportation Route" HorizontalAlignment="Left" Margin="461,31,0,0" VerticalAlignment="Top" Height="25" Width="161" Click="btnOpenFile2_Click" Grid.Column="2"/>
-        <TextBox HorizontalAlignment="Center" Margin="0,35,0,0" Text="Edges :" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Height="20" Grid.Column="2"/>
-        <TextBox HorizontalAlignment="Left" Margin="43,35,0,0" Text="Nodes :" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Height="20" Grid.ColumnSpan="2"/>
-        <Image HorizontalAlignment="Left" Height="351" Margin="23,205,0,0" VerticalAlignment="Top" Width="419" Grid.ColumnSpan="3"/>
-        <TextBox Name="PlaceDir" HorizontalAlignment="Left" Margin="43,80,0,0" Text="Place Directory" TextWrapping="Wrap" VerticalAlignment="Top" Width="246" Grid.ColumnSpan="3"/>
-        <TextBox Name="RouteDir" HorizontalAlignment="Left" Margin="376,80,0,0" Text="Transportation Route Directory" TextWrapping="Wrap" VerticalAlignment="Top" Width="246" Grid.Column="2"/>
-        <TextBlock HorizontalAlignment="Left" Margin="43,165,0,0" Text="Before: " TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <TextBlock HorizontalAlignment="Left" Margin="376,169,0,0" Text="After: " TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="2"/>
-        <TextBox Name="InfectTime" Grid.Column="2" HorizontalAlignment="Left" Margin="173,109,0,0" Text="Insert Infect Time Here
-                 " TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
-        <Button Content="Simulate!" Grid.Column="2" HorizontalAlignment="Left" Margin="226,140,0,0" Click="simulateGraph_click" VerticalAlignment="Top" Width="89"/>
-        <StackPanel Grid.Column="2">
-            <Grid>
-                <WindowsFormsHost x:Name="windowsFormsHost1" Height="350" Margin="340.8,205,9.6,8">
-                    <gv:GViewer x:Name="gViewer"/>
-                </WindowsFormsHost>
-            </Grid>
-        </StackPanel>
+        <Button Name="PlaceButton" Content="Select Places" HorizontalAlignment="Left" Margin="33.2,35,0,0" VerticalAlignment="Top" Height="25" Width="80" Click="btnOpenFile_Click" Grid.Column="2"/>
+        <Button Name="RouteButton" Content="Select Transportation Route" HorizontalAlignment="Left" Margin="28.8,115,0,0" VerticalAlignment="Top" Height="25" Width="161" Click="btnOpenFile2_Click" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <TextBox Name="PlaceDir" HorizontalAlignment="Left" Margin="43,72,0,0" Text="Place Directory" TextWrapping="Wrap" VerticalAlignment="Top" Width="246" Grid.ColumnSpan="3"/>
+        <TextBox Name="RouteDir" HorizontalAlignment="Left" Margin="43,152,0,0" Text="Transportation Route Directory" TextWrapping="Wrap" VerticalAlignment="Top" Width="246" Grid.ColumnSpan="3"/>
+        <WindowsFormsHost x:Name="windowsFormsHost1" Margin="128.2,35,331,27" Grid.Column="2">
+            <gv:GViewer x:Name="gViewer1"/>
+        </WindowsFormsHost>
+        <TextBlock Name="Keterangan" Grid.Column="2" HorizontalAlignment="Left" Margin="791.2,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="393" Width="314"/>
+        <TextBox x:Name="InfectTime" HorizontalAlignment="Left" Margin="78,204,0,0" Text="Insert Infect Time Here                  " TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Grid.ColumnSpan="3" Height="19"/>
+        <Button Content="Simulate!" Grid.Column="1" HorizontalAlignment="Left" Margin="9.8,238,0,0" Click="simulateGraph_click" VerticalAlignment="Top" Width="114" RenderTransformOrigin="0.5,0.5" Height="40" Grid.ColumnSpan="2"/>
+        <Button Content="+" HorizontalAlignment="Left" Margin="58.2,249,0,0" VerticalAlignment="Top" Width="24" Grid.Column="2"/>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="806.2,69,0,0" TextWrapping="Wrap" Text="Infection Route :" VerticalAlignment="Top" Height="21" Width="101"/>
+        <TextBlock HorizontalAlignment="Left" Margin="44,40,0,0" TextWrapping="Wrap" Text="Place: " VerticalAlignment="Top" Height="25" Width="56" Grid.ColumnSpan="2"/>
+        <TextBlock HorizontalAlignment="Left" Margin="44,119,0,0" TextWrapping="Wrap" Text="Path: " VerticalAlignment="Top" Height="25" Width="56" RenderTransformOrigin="0.675,0.52" Grid.ColumnSpan="2"/>
+        <Button Content="-" HorizontalAlignment="Left" Margin="69,249,0,0" VerticalAlignment="Top" Width="24"/>
     </Grid>
 </Window>

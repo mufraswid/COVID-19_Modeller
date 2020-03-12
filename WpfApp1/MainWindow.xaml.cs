@@ -16,6 +16,7 @@ using System.Xaml;
 using System.IO;
 using Microsoft.Win32;
 using System.Windows.Forms;
+using Microsoft.Msagl.Drawing;
 
 namespace WpfApp1
 {
@@ -24,26 +25,14 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        Graph g = new Graph();
+        Graph graph = new Graph("graph");
+        GraphO g = new GraphO();
         string placedir = "";
         string routedir = "";
         public MainWindow()
         {
             InitializeComponent();
-            //while (placedir == "" && routedir == "");
         }
-
-        /*static void Main(string[] args)
-        {
-            Graph g = new Graph();
-
-            loadGraph(ref g);
-
-            Console.Write("Masukkan Day: ");
-            double day = Convert.ToDouble(Console.ReadLine());
-            //debug
-            
-        }*/
 
         private void btnOpenFile_Click(object sender, RoutedEventArgs e) // TextBox str
         {
@@ -56,6 +45,7 @@ namespace WpfApp1
                 // Open document 
                 string filename = dlg.FileName;
                 PlaceDir.Text = filename;
+                placedir = filename;
             }
         }
 
@@ -71,6 +61,7 @@ namespace WpfApp1
                 // Open document 
                 string filename = dlg.FileName;
                 RouteDir.Text = filename;
+                routedir = filename;
             }
         }
 
@@ -87,36 +78,76 @@ namespace WpfApp1
             return res;
         }
 
+        private bool isEdgeExist(Edge a, List<Edge> b)
+        {
+            for (int j = 0; j < b.Count; j++)
+            {
+                if (a.getSourceNode() == b[j].getSourceNode() && a.getDestNode() == b[j].getDestNode())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
         private void simulateGraph_click(object sender, RoutedEventArgs e)
         {
-            int day = strToInt(InfectTime.Text);
+            //this.gViewer1.Graph = null;
+            for(int i = 0; i < 1500; i++)
+            {
+                this.gViewer1.Undo();
+            }
+            //this.gViewer1 = null;
+            GraphO g = new GraphO();
+            Graph graph = new Graph("graph");
+            int day = Convert.ToInt32(InfectTime.Text);
             if(day != -999)
             {
+                Keterangan.Text = "Waiting...";
                 loadGraph(ref g, placedir, routedir);
                 g.BFS(day);
-                g.getTimes();
-                g.printPath();
+                List<Node> nodes = new List<Node>();
+                nodes = g.getListNode();
+                List<Edge> edges = new List<Edge>();
+                edges = g.getListEdge();
+                List<Edge> path = new List<Edge>();
+                path = g.getPath();
+
+
+                for (int i = 0; i < path.Count; i++)
+                {
+                    Keterangan.Text += (i+1).ToString()+". " +path[i].getSourceNode() + "->" + path[i].getDestNode() + "\n";
+                }
+
+                //g.resetGraph();
+                
+                for(int i = 0; i < edges.Count; i++)
+                {
+                    if (isEdgeExist(edges[i], path)) {
+                        graph.AddEdge(edges[i].getSourceNode(), edges[i].getDestNode()).Attr.Color = Microsoft.Msagl.Drawing.Color.Chocolate;
+                    } else {
+                        graph.AddEdge(edges[i].getSourceNode(), edges[i].getDestNode());
+                    }
+                }
+                this.gViewer1.Graph = graph;
                 g.resetGraph();
+
             }  
         }/**/
 
-        static void loadGraph(ref Graph g, string pdir, string rdir)
+        static void loadGraph(ref GraphO g, string pdir, string rdir)
         {
             int numNodes = 0; int numEdges = 0;
             string startingCity = "";
-
-            //System.Console.Write("Masukkan nama file node: ");
-            //string nodeFile = System.Console.ReadLine();
-            //if (nodeFile == "") 
-            //string nodeFile = "node.txt"; //default
-            //System.Console.Write("Masukkan nama file edge: ");
-            //string edgeFile = System.Console.ReadLine();
-            //if (edgeFile == "") 
-            //string edgeFile = "edge.txt"; //default
-
             Parser.readNodes(pdir, ref numNodes, ref startingCity, ref g);
             Parser.readEdges(rdir, ref numEdges, ref g);
             g.setStartNode(startingCity);
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
