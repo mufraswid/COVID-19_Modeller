@@ -46,6 +46,19 @@ namespace WpfApp1
             }
         }
 
+        private void plusDay_Click(object sender, RoutedEventArgs e)
+        {
+            InfectTime.Text = (Convert.ToInt32(InfectTime.Text) + 1).ToString();
+            //ExecutedRoutedEventHandler ex = new RoutedEventHandler();
+        }
+
+        private void minusDay_Click(object sender, RoutedEventArgs e)
+        {
+            if(Convert.ToInt32(InfectTime.Text)>0)
+                InfectTime.Text = (Convert.ToInt32(InfectTime.Text) - 1).ToString();
+            //ExecutedRoutedEventHandler ex = new RoutedEventHandler();
+        }
+
         private void btnOpenFile2_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
@@ -101,7 +114,7 @@ namespace WpfApp1
                 Keterangan.Text = "";
                 for (int i = 0; i < path.Count; i++)
                 {
-                    Keterangan.Text += (i+1).ToString()+". " +path[i].getSourceNode() + "->" + path[i].getDestNode() + "\n";
+                    Keterangan.Text += (i+1).ToString()+".  " +path[i].getSourceNode() + "->" + path[i].getDestNode() + "\n\n";
                 }
                 
                 for(int i = 0; i < edges.Count; i++)
@@ -112,6 +125,16 @@ namespace WpfApp1
                         graph.AddEdge(edges[i].getSourceNode(), edges[i].getDestNode());
                     }
                 }
+
+                for(int i = 0; i < nodes.Count; i++)
+                {
+                    if (nodes[i].getInfected())
+                    {
+                        graph.FindNode(nodes[i].getName()).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Orange;
+                        graph.FindNode(nodes[i].getName()).Attr.Color = Microsoft.Msagl.Drawing.Color.Red;
+                    }
+                }
+
                 this.gViewer.Graph = graph;
                 g.resetGraph();
 
