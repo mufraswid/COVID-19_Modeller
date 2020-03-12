@@ -20,9 +20,6 @@ using Microsoft.Msagl.Drawing;
 
 namespace WpfApp1
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         Graph graph = new Graph("graph");
@@ -65,19 +62,6 @@ namespace WpfApp1
             }
         }
 
-        private int strToInt(string s)
-        {
-            int res = 0;
-            for(int i=0; i < s.Length; i++)
-            {
-                if (s[i] - '0' > 9 || s[i] - '0' < 0)
-                    return -999;
-                res *= 10;
-                res += s[i] - '0';
-            }
-            return res;
-        }
-
         private bool isEdgeExist(Edge a, List<Edge> b)
         {
             for (int j = 0; j < b.Count; j++)
@@ -96,7 +80,7 @@ namespace WpfApp1
             //this.gViewer1.Graph = null;
             for(int i = 0; i < 1500; i++)
             {
-                this.gViewer1.Undo();
+                this.gViewer.Undo();
             }
             //this.gViewer1 = null;
             GraphO g = new GraphO();
@@ -114,13 +98,11 @@ namespace WpfApp1
                 List<Edge> path = new List<Edge>();
                 path = g.getPath();
 
-
+                Keterangan.Text = "";
                 for (int i = 0; i < path.Count; i++)
                 {
                     Keterangan.Text += (i+1).ToString()+". " +path[i].getSourceNode() + "->" + path[i].getDestNode() + "\n";
                 }
-
-                //g.resetGraph();
                 
                 for(int i = 0; i < edges.Count; i++)
                 {
@@ -130,11 +112,11 @@ namespace WpfApp1
                         graph.AddEdge(edges[i].getSourceNode(), edges[i].getDestNode());
                     }
                 }
-                this.gViewer1.Graph = graph;
+                this.gViewer.Graph = graph;
                 g.resetGraph();
 
             }  
-        }/**/
+        }
 
         static void loadGraph(ref GraphO g, string pdir, string rdir)
         {
@@ -143,11 +125,6 @@ namespace WpfApp1
             Parser.readNodes(pdir, ref numNodes, ref startingCity, ref g);
             Parser.readEdges(rdir, ref numEdges, ref g);
             g.setStartNode(startingCity);
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }
