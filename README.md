@@ -1,4 +1,4 @@
-# Tubes2_STIMA 
+# COVID-19 Spread Modeller
 
 Using WPF on Visual Studio with C# and .Net Framework 4.8
 
